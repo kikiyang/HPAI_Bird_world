@@ -1,0 +1,3 @@
+nohup: ignoring input
+/home/wb/anaconda3/envs/gdal/lib/python3.8/site-packages/xarray/core/nanops.py:140: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a, axis=axis, dtype=dtype)
