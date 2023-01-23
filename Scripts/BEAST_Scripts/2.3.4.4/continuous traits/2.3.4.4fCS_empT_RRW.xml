@@ -38798,14 +38798,14 @@
 	
 
 	<!-- Generate a random starting tree under the coalescent process            -->
-	<coalescentSimulator id="startingTree">
+	<!--<coalescentSimulator id="startingTree">
 		<taxa idref="taxa"/>
 		<constantSize idref="initialDemo"/>
-	</coalescentSimulator>
+	</coalescentSimulator> -->
 	
 
 	<!-- Generate a tree model                                                   -->
-	<treeModel id="treeModel">
+	<!-- <treeModel id="treeModel">
 		<coalescentTree idref="startingTree"/>
 		<rootHeight>
 			<parameter id="treeModel.rootHeight"/>
@@ -38815,10 +38815,10 @@
 		</nodeHeights>
 		<nodeHeights internalNodes="true" rootNode="true">
 			<parameter id="treeModel.allInternalNodeHeights"/>
-		</nodeHeights>
+		</nodeHeights>  -->
 
 		<!-- START Tip date sampling                                                 -->
-		<leafHeight taxon="169851/stork/Germany/2014-12/H5N8">
+		<!-- <leafHeight taxon="169851/stork/Germany/2014-12/H5N8">
 			<parameter id="age(169851/stork/Germany/2014-12/H5N8)"/>
 		</leafHeight>
 		<leafHeight taxon="170184/Chicken/Germany/2015-01/H5N8">
@@ -38908,8 +38908,16 @@
 
 		<!-- END Tip date sampling                                                   -->
 
-	</treeModel>
+		<!-- </treeModel> -->
 
+
+	<empiricalTreeDistributionModel id="treeModel" fileName="2.3.4.4fPhy.sub1k.trees">
+		<taxa idref="taxa"/>
+	</empiricalTreeDistributionModel>
+	<statistic id="treeModel.currentTree" name="Current Tree">
+		<empiricalTreeDistributionModel idref="treeModel"/>
+	</statistic>
+	
 	<!-- Statistic for sum of the branch lengths of the tree (tree length)       -->
 	<treeLengthStatistic id="treeLength">
 		<treeModel idref="treeModel"/>
@@ -38922,11 +38930,11 @@
 	
 
 	<!-- Generate a gmrfSkyrideLikelihood for GMRF Bayesian Skyride process      -->
-	<gmrfSkyrideLikelihood id="skyride" timeAwareSmoothing="true" randomizeTree="false">
+	<!-- <gmrfSkyrideLikelihood id="skyride" timeAwareSmoothing="true" randomizeTree="false">
 		<populationSizes>
 
 			<!-- skyride.logPopSize is in log units unlike other popSize                 -->
-			<parameter id="skyride.logPopSize" dimension="1845" value="1.0"/>
+			<!-- <parameter id="skyride.logPopSize" dimension="1845" value="1.0"/>
 		</populationSizes>
 		<groupSizes>
 			<parameter id="skyride.groupSize" dimension="1845"/>
@@ -38937,11 +38945,11 @@
 		<populationTree>
 			<treeModel idref="treeModel"/>
 		</populationTree>
-	</gmrfSkyrideLikelihood>
+	</gmrfSkyrideLikelihood> -->
 	
 
 	<!-- The uncorrelated relaxed clock (Drummond, Ho, Phillips & Rambaut (2006) PLoS Biology 4, e88 )-->
-	<discretizedBranchRates id="branchRates">
+	<!-- <discretizedBranchRates id="branchRates">
 		<treeModel idref="treeModel"/>
 		<distribution>
 			<logNormalDistributionModel meanInRealSpace="true">
@@ -38971,11 +38979,11 @@
 	<rateCovarianceStatistic id="covariance" name="covariance">
 		<treeModel idref="treeModel"/>
 		<discretizedBranchRates idref="branchRates"/>
-	</rateCovarianceStatistic>
+	</rateCovarianceStatistic> -->
 	
 
 	<!-- The HKY substitution model (Hasegawa, Kishino & Yano, 1985)             -->
-	<HKYModel id="hky">
+	<!-- <HKYModel id="hky">
 		<frequencies>
 			<frequencyModel dataType="nucleotide">
 				<frequencies>
@@ -38986,19 +38994,19 @@
 		<kappa>
 			<parameter id="kappa" value="2.0" lower="0.0"/>
 		</kappa>
-	</HKYModel>
+	</HKYModel> -->
 
 	<!-- site model                                                              -->
-	<siteModel id="siteModel">
+	<!-- <siteModel id="siteModel">
 		<substitutionModel>
 			<HKYModel idref="hky"/>
 		</substitutionModel>
-	</siteModel>
+	</siteModel> -->
 
 	<!--                                                                         -->
-	<statistic id="mu" name="mu">
+	<!-- <statistic id="mu" name="mu">
 		<siteModel idref="siteModel"/>
-	</statistic>
+	</statistic> -->
 	
 	
 
@@ -39095,7 +39103,10 @@
 
 	<!-- Define operators                                                        -->
 	<operators id="operators" optimizationSchedule="log">
-		<scaleOperator scaleFactor="0.75" weight="1">
+		<empiricalTreeDistributionOperator weight="4">
+			<empiricalTreeDistributionModel idref="treeModel"/>
+		</empiricalTreeDistributionOperator>
+		<!--<scaleOperator scaleFactor="0.75" weight="1">
 			<parameter idref="kappa"/>
 		</scaleOperator>
 		<deltaExchange delta="0.01" weight="1">
@@ -39144,94 +39155,8 @@
 		</gmrfBlockUpdateOperator>
 		<scaleOperator scaleFactor="0.75" weight="30">
 			<parameter idref="location.diffusion.rates"/>
-		</scaleOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(169851/stork/Germany/2014-12/H5N8)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(170184/Chicken/Germany/2015-01/H5N8)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(172815/Ibis/Germany/2015-01/H5N8)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(191765/Scarlet_ibis/Germany/2015-01/H5N8)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(178249/American_wigeon/Canada/2014/H5N8)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(206773/Gull/Germany/2014-12/H5N8)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(279790/Wild_fowl/China/2016-01/H5N8)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(129982/Duck/China/2011-01/H5N2)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(129983/Goose/China/2011-01/H5N2)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(162467/Duck/China/2014-03/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205115/Duck/China/2015-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205116/Duck/China/2015-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205117/Chicken/China/2015-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205118/Chicken/China/2015-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205119/Duck/China/2014-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205120/Duck/China/2015-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205137/Dove/China/2014-12/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205138/Dove/China/2014-12/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205139/Dove/China/2015-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205140/Dove/China/2015-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205141/Dove/China/2014-12/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(205142/Dove/China/2015-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(206394/Snow_goose/United_States/2015-03/H5N2)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(224879/Duck/China/2013-12/H5N2)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(230759/Muscovy_duck/Vietnam/2015/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(235199/Duck/China/2013/H5N2)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(279424/Wild_bird/China/2015-01/H5N6)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(279791/Wild_bird/China/2015-01/H5N2)"/>
-		</uniformOperator>
-		<uniformOperator weight="1">
-			<parameter idref="age(282408/Poultry/China/2016-09/H5N6)"/>
-		</uniformOperator>
+		</scaleOperator> -->
+
 
 		<!-- START Multivariate diffusion model                                      -->
 		<precisionGibbsOperator weight="2">
@@ -39248,7 +39173,7 @@
 	<mcmc id="mcmc" chainLength="100000000" autoOptimize="true" operatorAnalysis="2.3.4.4fCS_empT_RRW.ops">
 		<joint id="joint">
 			<prior id="prior">
-				<logNormalPrior mu="1.0" sigma="1.25" offset="0.0">
+				<!--<logNormalPrior mu="1.0" sigma="1.25" offset="0.0">
 					<parameter idref="kappa"/>
 				</logNormalPrior>
 				<dirichletPrior alpha="1.0" sumsTo="1.0">
@@ -39269,7 +39194,7 @@
 				<gmrfSkyrideLikelihood idref="skyride"/>
 				
 				
-				<discretizedBranchRates idref="branchRates"/>
+				<discretizedBranchRates idref="branchRates"/>  -->
 
 				<!-- START Multivariate diffusion model                                      -->
 				<distributionLikelihood idref="location.diffusion.prior"/>
@@ -39279,7 +39204,7 @@
 
 			</prior>
 			<likelihood id="likelihood">
-				<treeDataLikelihood idref="treeLikelihood"/>
+				<!--<treeDataLikelihood idref="treeLikelihood"/> -->
 
 				<!-- START Multivariate diffusion model                                      -->
 				<multivariateTraitLikelihood idref="location.traitLikelihood"/>
@@ -39314,9 +39239,9 @@
 			<joint idref="joint"/>
 			<prior idref="prior"/>
 			<likelihood idref="likelihood"/>
-			<parameter idref="treeModel.rootHeight"/>
+			<!-- <parameter idref="treeModel.rootHeight"/> -->
 			<tmrcaStatistic idref="age(root)"/>
-			<treeLengthStatistic idref="treeLength"/>
+			<!-- <treeLengthStatistic idref="treeLength"/>
 			<parameter idref="skyride.precision"/>
 			<parameter idref="skyride.logPopSize"/>
 			<parameter idref="skyride.groupSize"/>
@@ -39326,7 +39251,7 @@
 			<parameter idref="ucld.stdev"/>
 			<rateStatistic idref="meanRate"/>
 			<rateStatistic idref="coefficientOfVariation"/>
-			<rateCovarianceStatistic idref="covariance"/>
+			<rateCovarianceStatistic idref="covariance"/> -->
 
 			<!-- START Multivariate diffusion model                                      -->
 			<matrixParameter idref="location.precision"/>
@@ -39337,58 +39262,25 @@
 			<!-- END Multivariate diffusion model                                        -->
 
 
-			<!-- START Tip date sampling                                                 -->
-			<parameter idref="age(169851/stork/Germany/2014-12/H5N8)"/>
-			<parameter idref="age(170184/Chicken/Germany/2015-01/H5N8)"/>
-			<parameter idref="age(172815/Ibis/Germany/2015-01/H5N8)"/>
-			<parameter idref="age(191765/Scarlet_ibis/Germany/2015-01/H5N8)"/>
-			<parameter idref="age(178249/American_wigeon/Canada/2014/H5N8)"/>
-			<parameter idref="age(206773/Gull/Germany/2014-12/H5N8)"/>
-			<parameter idref="age(279790/Wild_fowl/China/2016-01/H5N8)"/>
-			<parameter idref="age(129982/Duck/China/2011-01/H5N2)"/>
-			<parameter idref="age(129983/Goose/China/2011-01/H5N2)"/>
-			<parameter idref="age(162467/Duck/China/2014-03/H5N6)"/>
-			<parameter idref="age(205115/Duck/China/2015-01/H5N6)"/>
-			<parameter idref="age(205116/Duck/China/2015-01/H5N6)"/>
-			<parameter idref="age(205117/Chicken/China/2015-01/H5N6)"/>
-			<parameter idref="age(205118/Chicken/China/2015-01/H5N6)"/>
-			<parameter idref="age(205119/Duck/China/2014-01/H5N6)"/>
-			<parameter idref="age(205120/Duck/China/2015-01/H5N6)"/>
-			<parameter idref="age(205137/Dove/China/2014-12/H5N6)"/>
-			<parameter idref="age(205138/Dove/China/2014-12/H5N6)"/>
-			<parameter idref="age(205139/Dove/China/2015-01/H5N6)"/>
-			<parameter idref="age(205140/Dove/China/2015-01/H5N6)"/>
-			<parameter idref="age(205141/Dove/China/2014-12/H5N6)"/>
-			<parameter idref="age(205142/Dove/China/2015-01/H5N6)"/>
-			<parameter idref="age(206394/Snow_goose/United_States/2015-03/H5N2)"/>
-			<parameter idref="age(224879/Duck/China/2013-12/H5N2)"/>
-			<parameter idref="age(230759/Muscovy_duck/Vietnam/2015/H5N6)"/>
-			<parameter idref="age(235199/Duck/China/2013/H5N2)"/>
-			<parameter idref="age(279424/Wild_bird/China/2015-01/H5N6)"/>
-			<parameter idref="age(279791/Wild_bird/China/2015-01/H5N2)"/>
-			<parameter idref="age(282408/Poultry/China/2016-09/H5N6)"/>
-
-			<!-- END Tip date sampling                                                   -->
-
-			<treeDataLikelihood idref="treeLikelihood"/>
-			<discretizedBranchRates idref="branchRates"/>
+			<!-- <treeDataLikelihood idref="treeLikelihood"/> -->
+			<!-- <discretizedBranchRates idref="branchRates"/> -->
 
 			<!-- START Multivariate diffusion model                                      -->
 			<multivariateTraitLikelihood idref="location.traitLikelihood"/>
 
 			<!-- END Multivariate diffusion model                                        -->
 
-			<gmrfSkyrideLikelihood idref="skyride"/>
+			<!-- <gmrfSkyrideLikelihood idref="skyride"/> -->
 			
 		</log>
 
 		<!-- write tree log to file                                                  -->
 		<logTree id="treeFileLog" logEvery="10000" nexusFormat="true" fileName="2.3.4.4fCS_empT_RRW.trees" sortTranslationTable="true">
 			<treeModel idref="treeModel"/>
-			<trait name="rate" tag="rate">
+			<!-- <trait name="rate" tag="rate">
 				<discretizedBranchRates idref="branchRates"/>
-			</trait>
-			<joint idref="joint"/>
+			</trait> -->
+			<joint idref="joint"/> 
 
 			<!-- START Ancestral state reconstruction                                    -->
 			<trait name="location" tag="location">
@@ -39401,9 +39293,9 @@
 			<!-- START Multivariate diffusion model                                      -->
 			<multivariateDiffusionModel idref="location.diffusionModel"/>
 			<multivariateTraitLikelihood idref="location.traitLikelihood"/>
-			<trait name="rate" tag="location.rate">
+			<!-- <trait name="rate" tag="location.rate">
 				<arbitraryBranchRates idref="location.diffusion.branchRates"/>
-			</trait>
+			</trait>  -->
 
 			<!-- END Multivariate diffusion model                                        -->
 
