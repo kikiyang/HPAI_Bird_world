@@ -38904,7 +38904,7 @@
 		</leafHeight>
 		<leafHeight taxon="282408/Poultry/China/2016-09/H5N6">
 			<parameter id="age(282408/Poultry/China/2016-09/H5N6)"/>
-		</leafHeight>
+		</leafHeight> -->
 
 		<!-- END Tip date sampling                                                   -->
 
@@ -38931,7 +38931,7 @@
 
 	<!-- Generate a gmrfSkyrideLikelihood for GMRF Bayesian Skyride process      -->
 	<!-- <gmrfSkyrideLikelihood id="skyride" timeAwareSmoothing="true" randomizeTree="false">
-		<populationSizes>
+		<populationSizes> -->
 
 			<!-- skyride.logPopSize is in log units unlike other popSize                 -->
 			<!-- <parameter id="skyride.logPopSize" dimension="1845" value="1.0"/>
@@ -39037,14 +39037,14 @@
 
 
 	<!-- Likelihood for tree given sequence data                                 -->
-	<treeDataLikelihood id="treeLikelihood" useAmbiguities="false">
+	<!--<treeDataLikelihood id="treeLikelihood" useAmbiguities="false">
 		<partition>
 			<patterns idref="patterns"/>
 			<siteModel idref="siteModel"/>
 		</partition>
 		<treeModel idref="treeModel"/>
 		<discretizedBranchRates idref="branchRates"/>
-	</treeDataLikelihood>
+	</treeDataLikelihood> -->
 	
 
 	<!-- START Multivariate diffusion model                                      -->
@@ -39229,9 +39229,9 @@
 			<column label="age(root)" sf="6" width="12">
 				<tmrcaStatistic idref="age(root)"/>
 			</column>
-			<column label="ucld.mean" sf="6" width="12">
+			<!-- <column label="ucld.mean" sf="6" width="12">
 				<parameter idref="ucld.mean"/>
-			</column>
+			</column> -->
 		</log>
 
 		<!-- write log to file                                                       -->
