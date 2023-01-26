@@ -10,7 +10,7 @@
 	
 
 	<!-- The list of taxa to be analysed (can also include dates/ages).          -->
-	<!-- ntax=1846                                                               -->
+	<!-- ntax=1844                                                               -->
 	<taxa id="taxa">
 		<taxon id="148126/Wild_duck/China/2011-04-14/H5N1">
 			<date value="2011.282191780822" direction="forwards" units="years"/>
@@ -31360,40 +31360,40 @@
 			<!-- END Multivariate diffusion model                                        -->
 
 		</taxon>
-		<taxon id="206448/Cooper's_hawk/United_States/2015-04-14/H5N2">
+		<!-- <taxon id="206448/Coopers_hawk/United_States/2015-04-14/H5N2">
 			<date value="0.0" direction="forwards" units="years"/>
 			<attr name="Lat">
 				46.72955
 			</attr>
 			<attr name="Long">
 				-94.68589
-			</attr>
+			</attr> -->
 
 			<!-- START Multivariate diffusion model                                      -->
-			<attr name="location">
+			<!-- <attr name="location">
 				46.72955 -94.68589
-			</attr>
+			</attr> -->
 
 			<!-- END Multivariate diffusion model                                        -->
 
-		</taxon>
-		<taxon id="234679/Pallas's_sandgrouse/China/2015-02-20/H5N6">
+		<!-- </taxon> -->
+		<!-- <taxon id="234679/Pallass_sandgrouse/China/2015-02-20/H5N6">
 			<date value="0.0" direction="forwards" units="years"/>
 			<attr name="Lat">
 				23.3790333
 			</attr>
 			<attr name="Long">
 				113.7632828
-			</attr>
+			</attr> -->
 
 			<!-- START Multivariate diffusion model                                      -->
-			<attr name="location">
+			<!-- <attr name="location">
 				23.3790333 113.7632828
-			</attr>
+			</attr> -->
 
 			<!-- END Multivariate diffusion model                                        -->
 
-		</taxon>
+		<!-- </taxon> -->
 	</taxa>
 	
 	
