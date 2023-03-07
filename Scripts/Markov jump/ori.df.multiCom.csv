@@ -1,0 +1,12 @@
+"","birdorder","ori","dest","lag","corr","p"
+"-13","Charadriiformes","SChina","NChina",-1,0.816249316723744,0.00469026755101987
+"07","Charadriiformes","Qinghai","Europe",0,-0.820198861991941,0.00449367592782401
+"-31","Ciconiiformes","NChina","Europe",-3,0.845336995855499,0.00340784569427943
+"-24","Suliformes","JapanKorea","Europe",-2,0.86253066137393,0.00280907093279237
+"-25","Falconiformes","JapanKorea","Europe",-2,0.803902853850993,0.00535605544849838
+"014","Pelecaniformes","NChina","JapanKorea",0,0.818180365284598,0.0045931955577605
+"017","Ciconiiformes","NChina","JapanKorea",0,0.951861768541662,0.000976032209901945
+"-313","Ciconiiformes","NChina","Qinghai",-3,0.807800133240305,0.00513720956004549
+"020","Charadriiformes","SChina","SEA",0,0.802680394234795,0.00542641528515664
+"025","Suliformes","Europe","Qinghai",0,0.966012795768956,0.000818780997085211
+"-326","Ciconiiformes","Europe","Africa",-3,0.812693976208625,0.00487386171805082
