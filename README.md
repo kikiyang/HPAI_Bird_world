@@ -25,5 +25,6 @@
   - SDM: Species distriution model in Python that uses 'basemap' of ecological variables (Table S2) and bird tracking data (demo is in the folder) to infer bird monthly distribution maps (outputs are on [OSF project](https://osf.io/7a2uk/))
   - Location_Bird_Prob: Extract bird distribution probability at locations of virus lineage movements
 4. Markove Jump: run extract_jumpTrees.ipynb ([input: 2.3.4.4fAreaDTA+MJ.location.history.trees](https://osf.io/pkv9c/)) to extract virus lineage movement distribution (output: 2.3.4.4fAreaDTA_MJs_bi.txt in the folder); the output is used as input for running hist_markovJumps.ipynb to summarize virus lineage movement frequency during a year (output: virus_od_month_migtimes_bf3.csv) and plot violin polot in Figure 2; the output is used as input for running MarkovJumpMonthDis.R to plot histogram.
-5. Association_Bird_Virus: using virus_od_month_migtimes_bf3.csv (output in 4) and 2.3.4.4_bird.csv (output in 3) as inputs to run ccf.R to calculate the correlation between virus lineage movements and bird distribution probablity, and also account for multiple comparisons.
+5. Association_Bird_Virus: using virus_od_month_migtimes_bf3.csv (output in 4) and 2.3.4.4_bird.csv (output in 3) as inputs to run ccf.R to calculate the correlation between virus lineage movements and bird distribution probablity, and also account for multiple comparisons. Outputs are in the folder.
+
 
