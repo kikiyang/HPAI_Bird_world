@@ -1,0 +1,8 @@
+"","birdorder","ori","dest","lag","corr","p"
+"03","Passeriformes","Europe","Africa",0,0.850374236889763,0.00322138552567974
+"014","Charadriiformes","Russia","Africa",0,0.837421836169495,0.00372075580085318
+"110","Charadriiformes","Russia","Africa",1,0.912965259230978,0.00156364642182982
+"111","Anseriformes","Russia","Africa",1,0.944066256533587,0.0010741774151144
+"022","Suliformes","SChina","SEA",0,0.805812185217587,0.00524780917425338
+"36","Pelecaniformes","SEA","SChina",3,0.897764291351917,0.00187121086240238
+"029","Charadriiformes","WA","Africa",0,0.859384691523016,0.00291087904788156

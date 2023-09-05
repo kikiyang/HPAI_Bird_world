@@ -1,0 +1,15 @@
+"","birdorder","ori","dest","lag","corr","p"
+"0","Suliformes","Africa","Europe",0,0.945341659420751,0.00105751936054133
+"01","Suliformes","Africa","Russia",0,0.88463839211198,0.00218050733733066
+"-35","Ciconiiformes","Europe","USAandCanada",-3,0.800672731075114,0.0055437804745524
+"-219","Accipitriformes","Russia","CA",-2,0.81332750398819,0.0048406783618169
+"-222","Suliformes","Russia","Europe",-2,-0.814608629988008,0.00477419855469519
+"-226","Accipitriformes","Russia","Europe",-2,0.835357232257381,0.00380656160841419
+"-233","Accipitriformes","Russia","NChina",-2,0.815401312224759,0.00473347983313976
+"-431","Falconiformes","SEA","SChina",-4,0.87841407849763,0.00234298014648671
+"-356","Suliformes","USAandCanada","Europe",-3,-0.855381900696822,0.00304528101079971
+"-256","Ciconiiformes","USAandCanada","JapanKorea",-2,0.815973647029996,0.00470427568164622
+"-132","Falconiformes","USAandCanada","LA",-1,-0.853473848821654,0.00464531566836568
+"026","Falconiformes","USAandCanada","LA",0,-0.837290571258836,0.00548667802595948
+"-134","Accipitriformes","USAandCanada","LA",-1,0.843753736410399,0.00513541540374907
+"028","Accipitriformes","USAandCanada","LA",0,0.849376003853842,0.00484652427777132
