@@ -1,12 +1,12 @@
 # setwd('/Users/qiqiy/Documents/P2_WAI/manuscript/HPAI_Bird_world/Scripts/Correlation_bird_virus_continuous/code')
 setwd('/Users/qiqiy/Documents/P2_WAI/manuscript/HPAI_Bird_world/Scripts/4Markov_jump')
-# mj <- read.csv('../data/virus_od_month_migtimes_bf3.csv')
+mj <- read.csv('virus_od_month_migtimes_bf3.csv')
 # mj <- read.csv('virus_od_month_migtimes_bf3_2.3.2.1.csv')
-mj <- read.csv('virus_od_month_migtimes_bf3_2.3.4.4New.csv')
+# mj <- read.csv('virus_od_month_migtimes_bf3_2.3.4.4New.csv')
 library(dplyr)
-
+loc <- read.csv('2.3.4.4f_location.csv')
 # loc <- read.csv('2.3.2.1f_location.csv')
-loc <- read.csv('2.3.4.4Newf_location.csv')
+# loc <- read.csv('2.3.4.4Newf_location.csv')
 
 for(i in 1:nrow(mj)){
   mj[i,'origin'] <- strsplit(mj[i,'od'],'-')[[1]][1]
@@ -50,8 +50,9 @@ ggplot(data=mj.color %>% filter(direction=="NS"),mapping=aes(x=month,y=freq,fill
   ylab('Frequency') +
   labs(fill="Bird annual cycle\nphase")+
   theme_bw()
-ggsave(filename='MarkovJumpMonthDis_NS_2.3.2.1.png',width=9,height=6)
+# ggsave(filename='MarkovJumpMonthDis_NS_2.3.2.1.png',width=9,height=6)
 # ggsave(filename='MarkovJumpMonthDis_NS_2.3.4.4New.png',width=11)
+ggsave(filename='MarkovJumpMonthDis_NS_2.3.4.4.png')
 
 ggplot(data=mj.color %>% filter(direction=="SN"),mapping=aes(x=month,y=freq,fill=bird_range))+
   geom_col()+
@@ -65,8 +66,9 @@ ggplot(data=mj.color %>% filter(direction=="SN"),mapping=aes(x=month,y=freq,fill
   ylab('Frequency') +
   labs(fill="Bird annual cycle\nphase")+
   theme_bw()
-ggsave(filename='MarkovJumpMonthDis_SN_2.3.2.1.png',width=9,height=6)
+# ggsave(filename='MarkovJumpMonthDis_SN_2.3.2.1.png',width=9,height=6)
 # ggsave(filename='MarkovJumpMonthDis_SN_2.3.4.4New.png',width=10)
+ggsave(filename='MarkovJumpMonthDis_SN_2.3.4.4.png',width=10)
 
 ggplot(data=mj.color %>% filter(direction=="NS"),mapping=aes(x=month,y=counts,fill=bird_range))+
   geom_col()+
@@ -80,8 +82,10 @@ ggplot(data=mj.color %>% filter(direction=="NS"),mapping=aes(x=month,y=counts,fi
   ylab('Markov jump counts') +
   labs(fill="Bird annual cycle\nphase")+
   theme_bw()
-ggsave(filename='MarkovJumpCountsMonthDis_NS_2.3.2.1.png',width=9,height=6)
+# ggsave(filename='MarkovJumpCountsMonthDis_NS_2.3.2.1.png',width=9,height=6)
 # ggsave(filename='MarkovJumpCountsMonthDis_NS_2.3.4.4New.png',width=11)
+ggsave(filename='MarkovJumpCountsMonthDis_NS_2.3.4.4.png',width=11)
+
 ggplot(data=mj.color %>% filter(direction=="SN"),mapping=aes(x=month,y=counts,fill=bird_range))+
   geom_col()+
   scale_x_discrete(limits = c("Jan", "Feb","Mar","Apr","May","Jun","Jul",
