@@ -1,0 +1,6 @@
+load("/Users/qiqiy/Documents/P2_WAI/manuscript/HPAI_Bird_world/Scripts/5Association_Bird_Virus/bootstrap_2.3.2.1.RData")
+list
+list=()
+env()
+load("/Users/qiqiy/Documents/P2_WAI/manuscript/HPAI_Bird_world/Scripts/5Association_Bird_Virus/bootstrap_2.3.4.4.RData")
+load("/Users/qiqiy/Documents/P2_WAI/manuscript/HPAI_Bird_world/Scripts/5Association_Bird_Virus/bootstrap_2.3.4.4.RData")

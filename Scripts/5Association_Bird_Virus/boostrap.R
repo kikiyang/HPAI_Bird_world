@@ -1,0 +1,172 @@
+rm(list=ls())
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+# 0. Data
+# 0.1. Bird probability distribution time series (12 months)
+birds <- read.csv('../3Bird_month_dist/Location_Bird_Prob/output/2.3.4.4_bird.csv')
+birdorders <- c('Pelecaniformes','Gruiformes','Passeriformes','Suliformes', 
+                'Ciconiiformes', 'Falconiformes','Charadriiformes', 
+                'Anseriformes', 'Accipitriformes') 
+birddis <- list()
+for (k in 1:length(birdorders)){
+  b_tmp <- birds %>%
+    select(starts_with(birdorders[k]) | 'Location')
+  birddis[[k]] <- b_tmp
+}
+birddis.df <- ldply(birddis, function(x){
+  df <- x %>%
+    pivot_longer(cols=1:12, names_to = 'month',values_to = 'disprob') %>%
+    tidyr::separate(col=month,sep='mes',into=c('birdorder','month'))
+  return(df)
+})
+birddis.df$month <- as.numeric(birddis.df$month)
+
+# 0.2. Virus lineage movement time series
+od_migtimes <- read.csv('../4Markov_jump/virus_od_migtimes_bf3_2.3.4.4.csv')
+od_migtimes <- od_migtimes %>%
+  select(-X,-index)
+
+# 1. Block bootstrapping
+od_year <- od_migtimes %>%
+  group_by(od) %>%
+  select(-month,-counts)
+od_year <- unique(od_year)
+# Account for multiple comparisons
+NREPS <- 1/(0.05)*(10*2*length(unique(od_migtimes$od))*length(birdorders))
+bs_sample_nreps <- data.frame()
+for (nrep in 1:NREPS){
+  # 1.1. generate one bootstrap sample: (monthly) time series of virus lineage
+  # movements for each route
+  bs <- od_year %>%
+    group_by(od) %>%
+    sample_frac(1,replace=TRUE) %>%
+    mutate(NoRep=nrep)
+  bs_sample_nreps <- rbind(bs_sample_nreps,bs)
+}
+bs_samples <- left_join(bs_sample_nreps,od_migtimes,multiple='all',
+                        by = join_by(od, year))
+bs_month <- bs_samples %>%
+  group_by(od,month,NoRep) %>%
+  dplyr::summarise(vlm_total=sum(counts),.groups = 'drop')
+month.dict <- data.frame(index=c(1:12),month=c('Jan','Feb','Mar','Apr','May',
+                                               'Jun','Jul','Aug','Sep','Oct',
+                                               'Nov','Dec'))
+bs_month <- bs_month %>%
+  left_join(month.dict,by=join_by(month==month)) %>%
+  mutate(month_index=index) %>%
+  select(-month,-index) %>%
+  tidyr::separate(col=od,sep='-',into=c('ori','dest'),remove = FALSE)
+
+# 2. calculate stats for one sample
+# 2.1. correlation between each bird distribution probability (BDP) at 
+# origin/destination location and virus lineage movements (VLM) along 
+# each route
+virus_bird_ori <- left_join(bs_month,birddis.df,multiple='all',
+                        by=join_by(ori==Location,month_index==month))
+virus_bird_ori$birdloc <- 'ori'
+virus_bird_dest <- left_join(bs_month,birddis.df,multiple='all',
+                             by=join_by(dest==Location,month_index==month))
+virus_bird_dest$birdloc <- 'dest'
+virus_bird <- rbind(virus_bird_ori,virus_bird_dest)
+virus_bird_corr <- virus_bird %>%
+  group_by(birdloc,NoRep,od,birdorder) %>%
+  dplyr::summarise(corr=cor(vlm_total,disprob))
+
+# 2.2. average correlation between each BDP at each location 
+# and VLM from or to the location
+# bs_corr_loc <- virus_bird_corr %>%
+#   tidyr::separate(col=od,sep='-',into=c('ori','dest'),remove = FALSE) %>%
+#   mutate(loc = case_when(birdloc=='ori' ~ ori, birdloc=='dest' ~ dest)) %>%
+#   group_by(NoRep,loc,birdloc,birdorder) %>%
+#   dplyr::summarise(avg.loc=mean(corr))
+
+# 3. calculate stats (mean, quantile, p-value) for the distribution of 
+# samples' stat
+od_stat <- virus_bird_corr %>%
+  group_by(od,birdorder,birdloc) %>%
+  dplyr::summarise(avgCorr=mean(corr,na.rm = TRUE),
+                   quant025=quantile(corr,probs=.025,na.rm = TRUE),
+                   quant50=quantile(corr,probs=.5,na.rm = TRUE),
+                   quant975=quantile(corr,probs=.975,na.rm = TRUE),
+                   pval=2*min(mean(corr>0,na.rm=TRUE), 
+                              mean(corr<0,na.rm=TRUE))) %>%
+  mutate(birdloc_lab=case_when(birdloc=='dest'~'destination',
+                               birdloc=='ori'~'origin'))
+
+# loc_stat <- bs_corr_loc %>%
+#   group_by(loc,birdloc,birdorder) %>%
+#   dplyr::summarise(mean=mean(avg.loc,na.rm = TRUE),
+#                    quant25=quantile(avg.loc,probs=.025,na.rm = TRUE),
+#                    quant50=quantile(avg.loc,probs=.5,na.rm = TRUE),
+#                    quant975=quantile(avg.loc,probs=.975,na.rm = TRUE),
+#                    pval=2*min(mean(avg.loc>0,na.rm=TRUE), mean(avg.loc<0,na.rm=TRUE))) %>%
+#   mutate(birdloc_lab=case_when(birdloc=='dest' ~ 'destination',
+#                                birdloc=='ori' ~ 'origin'))
+save(od_stat,file='bootstrap_2.3.4.4.RData')
+write.csv(od_stat,file='2.3.4.4_od_stat.csv')
+# 4. Plot figures
+ggplot(data = od_stat, aes(x=avgCorr, y=birdorder,color=birdloc_lab)) +
+  facet_wrap(~od) + 
+  geom_errorbar(aes(xmin = quant025, xmax = quant975), width = 0.25, 
+                position=position_dodge(width = 0.5)) +
+  geom_point(size = 1, position=position_dodge(width = 0.5))  +
+  scale_y_discrete(labels = c('Accipitriformes','Anseriformes',
+                              'Charadriiformes','Ciconiiformes',
+                              'Falconiformes','Gruiformes','Passeriformes',
+                              'Pelecaniformes','Suliformes')) +
+  labs(y='Bird order', color='Bird\ndistribution\nprobability\nat',
+       x='Correlation between each bird and\nthe virus lineagment movements on the route') + 
+  theme_bw()
+ggsave(filename = '2.3.4.4_od_forestpl.png',width=12,height=7)
+
+od_stats_rank <- od_stat %>%
+  dplyr::group_by(od,birdloc) %>%
+  dplyr::mutate(avgCorrRank=order(order(avgCorr, decreasing=TRUE))) %>%
+  pivot_longer(c('quant025','quant50','quant975','avgCorr','avgCorrRank','pval'),
+               names_to = 'metric',values_to = 'z_score') %>%
+  mutate(metric_lab=
+           case_when(metric=='quant50'~'Median correlation coefficient',
+                     metric=='quant25'~'25% credibility interval of correlation coefficient',
+                     metric=='quant975'~'97.5% credibility interval of correlation coefficient',
+                     metric=='avgCorr' ~ 'Average correlation coefficient',
+                     metric=='avgCorrRank' ~ 'Ranking of average\ncorrelation coefficient'),
+         birdloc_lab=case_when(birdloc=='dest' ~ 'Birds at destination location',
+                           birdloc=='ori' ~ 'Birds at origin location'))
+avgCorrRank_df <- od_stats_rank%>% filter(metric=='avgCorrRank')
+avgCorrRank_df$z_score2 <- factor(avgCorrRank_df$z_score,levels=c(1,2,3,4,5,6,7,8,9))
+library(ggnewscale)
+ggplot()+
+  facet_grid(metric_lab~factor(birdloc_lab,levels =
+                                 c('Birds at origin location',
+                                   'Birds at destination location')),scales = 'free_y') +
+  geom_tile(data = avgCorrRank_df, mapping = aes(x=birdorder,y=od,fill=z_score2)) +
+  scale_fill_discrete(type=RColorBrewer::brewer.pal(9, "RdBu"))+
+  labs(fill='Ranking of\naverage\ncorrelation\ncoefficient',x='Bird order',
+       y='Virus lineage movement route') +
+  scale_x_discrete(guide = guide_axis(angle = 90),labels = c(
+    'Accipitriformes','Anseriformes','Charadriiformes','Ciconiiformes',
+    'Falconiformes','Gruiformes','Passeriformes','Pelecaniformes',
+    'Suliformes'))+
+  new_scale_fill() +
+  geom_tile(od_stats_rank%>% filter(metric=='avgCorr'),mapping = aes(x=birdorder,y=od,fill=z_score)) +
+  scale_fill_gradient2(midpoint = 0,low = 'steelblue', high = 'darkred', mid = 'white', na.value = 'grey',
+                       guide = guide_colorbar(order = 1)) +
+  labs(fill='Average\ncorrelation\ncoefficient',x='Bird order',
+       y='Virus lineage movement route')
+ggsave(filename = '2.3.4.4_od_rank_grids.png',width=7,height=7)
+
+# ggplot(data = loc_stat, aes(x=mean,y=birdorder,color=birdloc_lab)) +
+#   facet_wrap(~loc) +
+#   geom_errorbar(aes(xmin = quant25, xmax = quant975), width = 0.25,
+#                 position=position_dodge(width = 0.5)) +
+#   geom_point(size = 1,position=position_dodge(width = 0.5))  +
+#   scale_y_discrete(labels = c('Accipitriformes','Anseriformes',
+#                               'Charadriiformes','Ciconiiformes',
+#                               'Falconiformes','Gruiformes','Passeriformes',
+#                               'Pelecaniformes','Suliformes')) +
+#   labs(y='Bird order', color='Bird\ndistribution\nprobability\nat',
+#        x='Average correlation between each bird and\nall virus lineage movements from/to the location')+
+#   theme_bw()
+# ggsave(filename = '2.3.4.4_loc_forestpl.png',width=7,height=6)
