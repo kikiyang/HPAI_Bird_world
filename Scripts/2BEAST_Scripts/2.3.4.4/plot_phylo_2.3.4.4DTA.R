@@ -25,9 +25,14 @@ tree@data$location <- factor(tree@data$location, levels = c(
   "NChina+SChina","SChina","CA","SEA","Africa"))
 levels(tree@data$location)
 options(ignore.negative.edge=TRUE)
-ggtree(tree,aes(color=location),mrsd = "2018-01-10")+
+
+p <- ggtree(tree,aes(color=location),mrsd = "2018-01-10")+
   theme_tree2()+
   scale_color_manual(values = col2)+
   theme(legend.position = "right")+
-  scale_x_continuous(breaks=seq(2010,2018,1),label = c('2010','','2012','','2014','','2016','','2018'))
-ggsave('2.3.4.4.DTA.MCC.tree_longv.png',width=5,height=8)
+  scale_x_continuous(breaks=seq(2010,2018,1),
+                     label = c('2010','','2012','','2014','','2016','','2018'))
+  # geom_text(aes(label=node))
+
+flip(p, node1 = 1847, node2 = 1848)
+ggsave('2.3.4.4.DTA.MCC.tree_filp.png',width=5,height=6.7)

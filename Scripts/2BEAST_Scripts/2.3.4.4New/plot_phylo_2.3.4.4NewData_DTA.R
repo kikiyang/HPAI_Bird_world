@@ -28,5 +28,5 @@ ggtree(tree,aes(color=location),mrsd = "2023-07-11")+
   theme(legend.position = "right")+
   scale_x_continuous(breaks=seq(2012,2024,1),label = c('2012','','2014','','2016','','2018','','2020','',
                                                        '2022','',''))
-ggsave('2.3.4.4NewData.areaDTA.MCC.tree.png',width=5,height=8)
+ggsave('2.3.4.4NewData.areaDTA.MCC.tree2.png',width=5,height=5)
 
