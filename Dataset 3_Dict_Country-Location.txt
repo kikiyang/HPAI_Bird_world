@@ -1,0 +1,197 @@
+Country	Location
+Afghanistan	WA
+Algeria	Africa
+Angola	Africa
+Benin	Africa
+Botswana	Africa
+Burkina Faso	Africa
+Burundi	Africa
+Cabo Verde	Africa
+Cameroon	Africa
+Central African Rep.	Africa
+Comoros	Africa
+Congo	Africa
+Cote d'Ivoire	Africa
+Egypt	Africa
+Eritrea	Africa
+Ethiopia	Africa
+Fmr Sudan	Africa
+Gabon	Africa
+Gambia	Africa
+Ghana	Africa
+Guinea	Africa
+Guinea-Bissau	Africa
+Kenya	Africa
+Lesotho	Africa
+Madagascar	Africa
+Malawi	Africa
+Mali	Africa
+Mauritania	Africa
+Mauritius	Africa
+Mayotte	Africa
+Morocco	Africa
+Mozambique	Africa
+Namibia	Africa
+Niger	Africa
+Nigeria	Africa
+Rwanda	Africa
+Sao Tome and Principe	Africa
+Senegal	Africa
+Seychelles	Africa
+Sierra Leone	Africa
+So. African Customs Union	Africa
+South Africa	Africa
+Sudan	Africa
+Swaziland	Africa
+Togo	Africa
+Tunisia	Africa
+Uganda	Africa
+United Rep. of Tanzania	Africa
+Zambia	Africa
+Zimbabwe	Africa
+Bangladesh	CA
+Bhutan	CA
+India	CA
+Kyrgyzstan	CA
+Maldives	CA
+Nepal	CA
+Sri Lanka	CA
+China	China
+China, Hong Kong SAR	China
+China, Macao SAR	China
+Albania	Europe
+Andorra	Europe
+Austria	Europe
+Belarus	Europe
+Belgium	Europe
+Belgium-Luxembourg	Europe
+Bosnia Herzegovina	Europe
+Bulgaria	Europe
+Croatia	Europe
+Czechia	Europe
+Denmark	Europe
+Estonia	Europe
+Faeroe Isds	Europe
+Finland	Europe
+France	Europe
+Germany	Europe
+Greece	Europe
+Hungary	Europe
+Iceland	Europe
+Ireland	Europe
+Italy	Europe
+Latvia	Europe
+Lithuania	Europe
+Luxembourg	Europe
+Malta	Europe
+Montenegro	Europe
+Netherlands	Europe
+Norway	Europe
+Poland	Europe
+Portugal	Europe
+Rep. of Moldova	Europe
+Romania	Europe
+Serbia	Europe
+Serbia and Montenegro	Europe
+Slovakia	Europe
+Slovenia	Europe
+Spain	Europe
+Sweden	Europe
+Switzerland	Europe
+TFYR of Macedonia	Europe
+Ukraine	Europe
+United Kingdom	Europe
+Japan	JapanKorea
+Rep. of Korea	JapanKorea
+Anguilla	LA
+Argentina	LA
+Bahamas	LA
+Barbados	LA
+Belize	LA
+Bolivia (Plurinational State of)	LA
+Brazil	LA
+Chile	LA
+Colombia	LA
+Costa Rica	LA
+Cuba	LA
+Dominica	LA
+Dominican Rep.	LA
+Ecuador	LA
+El Salvador	LA
+Grenada	LA
+Guatemala	LA
+Guyana	LA
+Honduras	LA
+Jamaica	LA
+Mexico	LA
+Montserrat	LA
+Neth. Antilles	LA
+Nicaragua	LA
+Panama	LA
+Paraguay	LA
+Peru	LA
+Saint Kitts and Nevis	LA
+Saint Lucia	LA
+Saint Vincent and the Grenadines	LA
+Suriname	LA
+Trinidad and Tobago	LA
+Turks and Caicos Isds	LA
+Uruguay	LA
+Venezuela	LA
+Mongolia	Mongolia
+Australia	Oceania
+Cook Isds	Oceania
+Fiji	Oceania
+French Polynesia	Oceania
+FS Micronesia	Oceania
+Kiribati	Oceania
+New Caledonia	Oceania
+New Zealand	Oceania
+Palau	Oceania
+Papua New Guinea	Oceania
+Samoa	Oceania
+Solomon Isds	Oceania
+Tonga	Oceania
+Vanuatu	Oceania
+Wallis and Futuna Isds	Oceania
+Other Asia, nes	Other Asia
+Azerbaijan	Russia
+Kazakhstan	Russia
+Russian Federation	Russia
+Turkmenistan	Russia
+Brunei Darussalam	SEA
+Cambodia	SEA
+Indonesia	SEA
+Lao People's Dem. Rep.	SEA
+Malaysia	SEA
+Myanmar	SEA
+Philippines	SEA
+Singapore	SEA
+Thailand	SEA
+Timor-Leste	SEA
+Viet Nam	SEA
+Antigua and Barbuda	USAandCanada
+Aruba	USAandCanada
+Bermuda	USAandCanada
+Canada	USAandCanada
+Greenland	USAandCanada
+USA	USAandCanada
+Armenia	WA
+Bahrain	WA
+Cyprus	WA
+Georgia	WA
+Iran	WA
+Iraq	WA
+Israel	WA
+Jordan	WA
+Kuwait	WA
+Lebanon	WA
+Oman	WA
+Pakistan	WA
+Qatar	WA
+Saudi Arabia	WA
+State of Palestine	WA
+Syria	WA
+Turkey	WA
+United Arab Emirates	WA
+Yemen	WA
