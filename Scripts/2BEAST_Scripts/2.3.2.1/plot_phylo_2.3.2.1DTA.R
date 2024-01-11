@@ -33,4 +33,4 @@ ggtree(tree,aes(color=location),mrsd = "2018-01-01")+
   scale_color_manual(values = col2)+
   theme(legend.position = "right")+
   scale_x_continuous(breaks=seq(2004,2018,1),label = c('2004','','2006','','2008','','2010','','2012','','2014','','2016','','2018'))
-ggsave('2.3.2.1.DTA.MCC.tree.png',height=8,width=5)
+ggsave('2.3.2.1.DTA.MCC.tree.pdf',height=8,width=5)

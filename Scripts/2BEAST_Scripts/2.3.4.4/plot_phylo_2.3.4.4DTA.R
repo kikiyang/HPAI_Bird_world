@@ -35,4 +35,4 @@ p <- ggtree(tree,aes(color=location),mrsd = "2018-01-10")+
   # geom_text(aes(label=node))
 
 flip(p, node1 = 1847, node2 = 1848)
-ggsave('2.3.4.4.DTA.MCC.tree_filp.png',width=5,height=6.7)
+ggsave('2.3.4.4.DTA.MCC.tree_filp.pdf',width=5,height=6.7)
