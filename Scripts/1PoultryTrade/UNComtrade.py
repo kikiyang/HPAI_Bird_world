@@ -11,7 +11,8 @@ import os.path
 
 url = "http://comtrade.un.org/api/get?"
 
-years = list(range(2016,2017))
+# years = list(range(2016,2017))
+years = list(range(1962, 2023))
 years_str = [str(year) for year in years]
 
 with open('partnerCode.json') as codef:
