@@ -33,6 +33,5 @@ We gratefully acknowledge all data contributors of virus genome sequences, i.e.,
 We also gratefully acknowledge all bird tracking data contributors, i.e., the authors and other researchers in their originating groups collecting the data and metadata and sharing via Movebank, on which this research is based. The principle investigator, contact person, citation or data repository DOI are listed in Supplementary Dataset 2 and [README_MOVEBANK_DATA.md](https://github.com/kikiyang/HPAI_Bird_world/blob/main/README_MOVEBANK_DATA.md). 
 
 ## Citation
-## Citation
 - For the article: Yang, Q., Wang, B., Lemey, P., Dong, L., Mu, T., Wiebe, R. A., Guo, F., Trovão, N. S., Park, S. W., Lewis, N., Tsui, J. L.-H., Bajaj, S., Cheng, Y., Yang, L., Haba, Y., Li, B., Zhang, G., Pybus, O. G., Tian, H., & Grenfell, B. (2024). Synchrony of Bird Migration with Global Dispersal of Avian Influenza Reveals Exposed Bird Orders. Nature Communications, 15(1), Article 1. https://doi.org/10.1038/s41467-024-45462-1
 - For the GitHub Repository: Yang, Q., Wang, B. & Lemey, P. HPAI_Bird_world v1.0.0 https://doi.org/10.5281/zenodo.10480799
